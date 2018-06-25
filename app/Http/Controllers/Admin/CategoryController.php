@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
+use App\Model\user\categories;
 class CategoryController extends Controller
 {
     /**
@@ -12,9 +13,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getAjax(Request $request){
+       //bad example how to use MVC
+         DB::insert('insert into category (name, slug) values (?, ?)', [$request->cat_name, $request->cat_slug]);
+     }
+
     public function index()
     {
-        //
+        $category = categories::all();
+        return view('admin/showcatcat',compact('category'));
+        //return $category;
     }
 
     /**
@@ -24,7 +32,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/tag');
     }
 
     /**
@@ -57,7 +65,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+         $categoryEdit = categories::find($id);
+
+         return view('admin/editcategory',compact('categoryEdit'));
+
     }
 
     /**
@@ -69,7 +80,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $categoryUpdate = categories::find($id);
+       $categoryUpdate->name = $request->tag_name;
+       $categoryUpdate->slug = $request->tag_slug;
+       $categoryUpdate->save();
     }
 
     /**

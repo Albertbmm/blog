@@ -4,8 +4,8 @@ namespace App\Model\user;
 
 use Illuminate\Database\Eloquent\Model;
 
-class categories extends Model
+class Tag extends Model
 {
-  public $table = "category";
-      //
+   public $table = "tag";
+
 }

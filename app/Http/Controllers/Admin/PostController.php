@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\admin\Post;
 
 class PostController extends Controller
 {
@@ -14,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $listPost = Post::all();
+        return view('admin/showpost',compact('listPost'));
     }
 
     /**
@@ -37,6 +38,23 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+          'tittle'=>'required',
+          'subtittle' => 'required',
+          'slug' =>'required',
+          'textBlog' =>'required'
+        ]);
+        $post = new Post;
+        $post->tittle = $request->tittle;
+        $post->subtittle = $request->subtittle;
+        $post->slug = $request->slug;
+        $post->bodyText = $request->textBlog;
+        if($request->status==null){
+              $request->status = 'off';
+        }
+        $post->status = $request->status;
+        $post->save();
+        return redirect(route('post.index'));
     }
 
     /**
@@ -47,7 +65,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin/editpost');
     }
 
     /**
@@ -59,6 +77,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $postEdit = Post::find($id);
+        return view('admin/editpost',compact('postEdit'));
     }
 
     /**
@@ -70,7 +90,17 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $postUpdate = Post::find($id);
+      $postUpdate->tittle = $request->tittle;
+      $postUpdate->subtittle = $request->subtittle;
+      $postUpdate->slug = $request->slug;
+      $postUpdate->bodyText = $request->textBlog;
+      if($request->status==null){
+            $request->status = 'off';
+      }
+      $postUpdate->status = $request->status;
+      $postUpdate->save();
+      return redirect()->route('post.index');
     }
 
     /**

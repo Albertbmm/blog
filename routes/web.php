@@ -29,10 +29,9 @@ Route::group(['namespace'=>'Admin'],function(){
   Route::resource('admin/tag','TagController');
   //category route
   Route::resource('admin/category','CategoryController');
-
-
+  Route::post('admin/category/create/ajax','CategoryController@getAjax');
+  Route::post('admin/tag/create/ajax','TagController@getAjax');
 });
-
 // Route::get('/admin/post',function(){
 //     return view('admin.post');
 // });

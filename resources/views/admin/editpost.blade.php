@@ -4,7 +4,6 @@
 UNTUK MEMBUAT POST
 -->
 @section('main_content')
-
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -21,13 +20,7 @@ UNTUK MEMBUAT POST
   <!-- Main content -->
   <section class="content">
     <div class="row">
-      @if(count($errors) > 0)
-        <div class="col-md-12" >
-          <p class="alert alert-danger">
-              {{$errors}}
-          </p>
-            </div>
-      @endif
+
       <div class="col-md-12">
         <div class="box box-primary">
           <div class="box-header with-border">
@@ -35,20 +28,21 @@ UNTUK MEMBUAT POST
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form role="form"  method="post" action="{{route('post.store')}}" >
+          <form role="form"  method="post" action="{{route('post.update',['post'=>$postEdit->id])}}" >
             {{ csrf_field() }}
+            {{method_field('PUT')}}
             <div class="box-body">
               <div class="form-group">
                 <label for="tittle">Judul Post</label>
-                <input type="text" class="form-control" id="tittle" name="tittle" placeholder="Judul Post">
+                <input type="text" class="form-control" id="tittle" name="tittle" value="{{$postEdit->tittle}}">
               </div>
               <div class="form-group">
                 <label for="subtittle">Sub Judul Post</label>
-                <input type="text" class="form-control" id="subtittle" name="subtittle" placeholder="Sub Judul">
+                <input type="text" class="form-control" id="subtittle" name="subtittle" value="{{$postEdit->subtittle}}">
               </div>
               <div class="form-group">
                 <label for="slug">Slug</label>
-                <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+                <input type="text" class="form-control" id="slug" name="slug" value="{{$postEdit->slug}}">
               </div>
 
               <div class="form-group">
@@ -57,6 +51,7 @@ UNTUK MEMBUAT POST
               <div class="box-body pad">
 
                       <textarea id="editor1" name="textBlog" rows="10" cols="80">
+                              {{$postEdit->bodyText}}
                       </textarea>
               </div>
 
@@ -65,7 +60,11 @@ UNTUK MEMBUAT POST
               </div>
               <div class="checkbox">
                 <br />
-                  <input type="checkbox" id="status" name="status"> Publish
+                @if($postEdit->status == 'on')
+                  <input type="checkbox" id="status" name="status" checked> Publish
+                @ELSE
+                  <input type="checkbox" id="status" name="status" > Publish
+                @endif
               </div>
             </div>
             </div>
@@ -80,7 +79,6 @@ UNTUK MEMBUAT POST
       </div>
 
     </div>
-
   </section>
 </div>
 @endsection

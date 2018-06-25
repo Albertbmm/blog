@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
   @include('admin/layouts/head')
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   </head>
   <body class="hold-transition skin-purple sidebar-mini">
     <div class="wrapper">
@@ -11,9 +12,11 @@
       @section('main_content')
         @show
 
-      @include('admin/layouts/footer')
+
     </div>
+    @include('admin/layouts/footer')
   </body>
+
 
   <!-- jQuery 2.2.3 -->
   <script src="{{asset('admin/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
@@ -26,7 +29,8 @@
   <!-- AdminLTE for demo purposes -->
   <script src="{{asset('admin/dist/js/demo.js')}}"></script>
   <!-- CK Editor -->
-
+  @section('footerSection')
+     @show
   <!-- Include the Quill library -->
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
   <!-- include summernote css/js -->

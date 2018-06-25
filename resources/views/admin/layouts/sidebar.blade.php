@@ -4,7 +4,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
         <p>Alexander Pierce</p>
@@ -32,8 +32,9 @@
       </li>
       <li class="header">Show NAVIGATION</li>
       <li class="active treeview">
-          <li class=""><a href="#"><i class="fa fa-circle-o"></i> Post</a></li>
-          <li class=""><a href="#"><i class="fa fa-circle-o"></i> Categories & Tags</a></li>
+          <li class=""><a href="{{route('post.index')}}"><i class="fa fa-circle-o"></i> Post</a></li>
+          <li class=""><a href="{{route('category.index')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
+          <li class=""><a href="{{route('tag.index')}}"><i class="fa fa-circle-o"></i> Tags</a></li>
           <li class=""><a href="#"><i class="fa fa-circle-o"></i> Users</a></li>
       </li>
     </ul>

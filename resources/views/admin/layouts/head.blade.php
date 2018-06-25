@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="{{asset('admin/dist/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" type="text/css" href="{{asset('admin/loading/loading.css')}}"/>
+  <link rel="stylesheet" type="text/css" href="{{asset('admin/loading/loading-btn.css')}}"/>
   <link rel="stylesheet" href="{{asset('admin/dist/css/skins/_all-skins.min.css')}}">
 
   <!-- include libraries(jQuery, bootstrap) -->
@@ -44,3 +46,5 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  @section('headSection')
+     @show
